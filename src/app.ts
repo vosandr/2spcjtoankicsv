@@ -9,7 +9,7 @@ export default (inputPath: string, outputPath: string) => {
       line.includes("\t")===true?
       line.replace('\t', '<br>'):
       line.replace('/^/', '"')&&line.replace('/$/', ';"')
-    fs.appendFileSync(outputPath, line)
+    fs.appendFileSync(__dirname+'/'+outputPath, line)
     }
   )
 }
