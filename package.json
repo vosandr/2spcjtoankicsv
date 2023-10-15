@@ -1,6 +1,6 @@
 {
   "name": "2spcjtoankicsv",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./dist/app.js",
   "types": "./dist/app.d.ts",
   "files": [
