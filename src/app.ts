@@ -9,7 +9,7 @@ export default (inputPath: string, outputPath: string) => {
   const writeStream=fs.createWriteStream(outputPath)
   rl.on('line', (line) => {
     if(line.includes("\t")===true){
-      writeStream.write(line.replace('\t', '<br>'))
+      writeStream.write(line.replace('  ', '<br>'))
     }
     else{
       writeStream.write(line.replace('/^/', '"'))
