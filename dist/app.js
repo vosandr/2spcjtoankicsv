@@ -3,12 +3,16 @@ import fs from 'fs';
 export default (function (inputPath, outputPath) {
     var rl = readline.createInterface({
         input: fs.createReadStream(inputPath),
-        output: fs.createWriteStream(outputPath)
+        crlfDelay: Infinity,
     });
+    var writeStream = fs.createWriteStream(outputPath);
     rl.on('line', function (line) {
-        line.includes("\t") === true ?
-            line.replace('\t', '<br>') :
-            line.replace('/^/', '"') && line.replace('/$/', ';"');
-        fs.appendFileSync(__dirname + '/example2.txt', line);
+        if (line.includes("  ") === true) {
+            writeStream.write(line.replace('  ', '<br>'));
+        }
+        else {
+            writeStream.write(line.replace('/^/', '"'));
+            writeStream.write(line.replace('/$/', ';"'));
+        }
     });
 });
