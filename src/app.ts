@@ -13,7 +13,7 @@ export default (inputPath: string, outputPath: string) => {
     }
     else{
       writeStream.write(line.replace('/^/', '"'))
-      writeStream.write(line.replace('/$/', ';"'))
+      writeStream.write(line.replace('/$/', ';"'+EOL));
     }
   })
 }
