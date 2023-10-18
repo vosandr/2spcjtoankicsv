@@ -1,17 +1,19 @@
 import readline from 'readline';
 import fs from 'fs';
+import {EOL} from 'os';
 export default (inputPath: string, outputPath: string) => {
   const rl = readline.createInterface({ 
     input: fs.createReadStream(inputPath),
-    output: fs.createWriteStream(outputPath)
+    crlfDelay: Infinity,
   }); 
+  const writeStream=fs.createWriteStream(outputPath)
   rl.on('line', (line) => {
     if(line.includes("\t")===true){
-      fs.appendFileSync(outputPath, line.replace('\t', '<br>'))
+      writeStream.write(line.replace('\t', '<br>'))
     }
     else{
-      fs.appendFileSync(outputPath, line.replace('/^/', '"'))
-      fs.appendFileSync(outputPath, line.replace('/$/', ';"'))
+      writeStream.write(line.replace('/^/', '"'))
+      writeStream.write(line.replace('/$/', ';"'))
     }
   })
 }
